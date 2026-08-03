@@ -1,0 +1,54 @@
+<div class="relative w-full h-full">
+  <div
+    class="overflow-hidden"
+    (mousedown)="startDrag($event)"
+    (mousemove)="onDrag($event)"
+    (mouseup)="endDrag()"
+    (mouseleave)="endDrag()"
+    (touchstart)="startDrag($event)"
+    (touchmove)="onDrag($event)"
+    (touchend)="endDrag()"
+  >
+    <div
+      class="flex"
+      [class.transition-transform]="!isDragging()"
+      [style.transform]="'translateX(' + translateX() + 'px)'"
+    >
+      @for (item of items(); track $index) {
+        <div
+          class="min-w-full p-4"
+          #slide
+        >
+          <div class="bg-white rounded-2xl shadow-md p-6 text-center">
+            {{ item }}
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+  <button
+    class="absolute left-2 top-1/2 -translate-y-1/2 bg-black/60 text-white px-3 py-2 rounded-full opacity-20"
+    (click)="prev()"
+  >
+    ‹
+  </button>
+
+  <button
+    class="absolute right-2 top-1/2 -translate-y-1/2 bg-black/60 text-white px-3 py-2 rounded-full opacity-20"
+    (click)="next()"
+  >
+    ›
+  </button>
+
+  <div class="flex justify-center mt-4 gap-2">
+    @for (_ of items(); track $index) {
+      <div
+        class="h-2 w-2 rounded-full cursor-pointer transition-all"
+        [class.bg-blue-500]="$index === currentIndex()"
+        [class.bg-gray-300]="$index !== currentIndex()"
+        (click)="goTo($index)"
+      ></div>
+    }
+  </div>
+</div>
+
