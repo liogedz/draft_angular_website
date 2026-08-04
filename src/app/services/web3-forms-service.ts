@@ -1,12 +1,14 @@
-import { Service } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ContactData } from '@common/contact-data';
 import { ENVIRONMENT } from '@common/environment';
 
-@Service()
+@Injectable({ providedIn: 'root' })
+
 export class Web3FormsService {
-  url=ENVIRONMENT.web3FormUrl
-  key=ENVIRONMENT.web3FormKey
+
+  url = ENVIRONMENT.web3FormUrl;
+  key = ENVIRONMENT.web3FormKey;
   constructor(private http: HttpClient) {}
 
   send(data: ContactData) {

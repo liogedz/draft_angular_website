@@ -1,7 +1,7 @@
 import { Component, computed, signal } from '@angular/core';
 import { ContactData } from '@common/contact-data';
 import { email, form, FormField, FormRoot, required } from '@angular/forms/signals';
-import { firstValueFrom } from 'rxjs';
+import { catchError, firstValueFrom } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Web3FormsService } from '@services/web3-forms-service';
 
@@ -13,6 +13,9 @@ import { Web3FormsService } from '@services/web3-forms-service';
   standalone: true,
 })
 export class ContactComponent {
+  readonly status = signal<'idle' | 'success' | 'sending' | 'error'>('idle');
+  readonly errorMessage = signal('');
+
   constructor(private web3FormService: Web3FormsService) {}
   contactModel = signal<ContactData>({
     email: '',
@@ -31,7 +34,16 @@ export class ContactComponent {
     {
       submission: {
         action: async (f) => {
-          await firstValueFrom(this.web3FormService.send(f().value()));
+          this.status.set('sending');
+          try {
+            await firstValueFrom(this.web3FormService.send(f().value()));
+            this.status.set('success');
+            this.errorMessage.set('');
+            this.resetModel();
+          } catch (err) {
+            this.status.set('error');
+            this.errorMessage.set('Failed to send message');
+          }
         },
       },
     },
@@ -52,4 +64,12 @@ export class ContactComponent {
   );
 
   isFormDisabled = computed(() => this.hasFormErrors());
+
+  resetModel() {
+    this.contactModel.set({
+      email: '',
+      subject: '',
+      message: '',
+    });
+  }
 }
