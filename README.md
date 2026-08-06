@@ -6,6 +6,8 @@ Developing my draft website frontend only
 
 Set your `Web3Form` key in [environment](./src/app/common/environment.ts)
 
+## Angular
+
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.0.6.
 
 ## Development server

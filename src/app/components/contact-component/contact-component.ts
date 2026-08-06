@@ -1,13 +1,13 @@
 import { Component, computed, signal } from '@angular/core';
 import { ContactData } from '@common/contact-data';
 import { email, form, FormField, FormRoot, required } from '@angular/forms/signals';
-import { catchError, firstValueFrom } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { firstValueFrom } from 'rxjs';
 import { Web3FormsService } from '@services/web3-forms-service';
+import { NgHcaptchaModule } from 'ng-hcaptcha';
 
 @Component({
   selector: 'app-contact-component',
-  imports: [FormRoot, FormField],
+  imports: [FormRoot, FormField, NgHcaptchaModule],
   templateUrl: './contact-component.html',
   styleUrl: './contact-component.css',
   standalone: true,
@@ -15,6 +15,16 @@ import { Web3FormsService } from '@services/web3-forms-service';
 export class ContactComponent {
   readonly status = signal<'idle' | 'success' | 'sending' | 'error'>('idle');
   readonly errorMessage = signal('');
+  captchaToken = signal('');
+  onVerify(token: string) {
+    this.captchaToken.set(token);
+  }
+  onExpired() {
+    this.captchaToken.set('');
+  }
+  onError() {
+    this.captchaToken.set('');
+  }
 
   constructor(private web3FormService: Web3FormsService) {}
   contactModel = signal<ContactData>({
@@ -36,7 +46,7 @@ export class ContactComponent {
         action: async (f) => {
           this.status.set('sending');
           try {
-            await firstValueFrom(this.web3FormService.send(f().value()));
+            await firstValueFrom(this.web3FormService.send(f().value(), this.captchaToken()));
             this.status.set('success');
             this.errorMessage.set('');
             this.resetModel();
@@ -63,7 +73,9 @@ export class ContactComponent {
       this.contactForm.message().touched(),
   );
 
-  isFormDisabled = computed(() => this.hasFormErrors());
+  isCaptchaMissing = computed(() => !this.captchaToken());
+
+  isFormDisabled = computed(() => this.hasFormErrors() || this.isCaptchaMissing());
 
   resetModel() {
     this.contactModel.set({
