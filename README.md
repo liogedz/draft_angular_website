@@ -4,7 +4,8 @@ Developing my draft website frontend only
 
 ## Environment
 
-Set your `Web3Form` key in [environment](./src/app/common/environment.ts)
+Set your `web3FormKey` in [environment](./src/app/common/environment.ts)
+it is safe to be public
 
 ## Angular
 

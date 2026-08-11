@@ -4,10 +4,12 @@ import { email, form, FormField, FormRoot, required } from '@angular/forms/signa
 import { firstValueFrom } from 'rxjs';
 import { Web3FormsService } from '@services/web3-forms-service';
 import { NgHcaptchaModule } from 'ng-hcaptcha';
+import { ContactError } from '@components/contact-error/contact-error';
+import { ContactSuccess } from '@components/contact-success/contact-success';
 
 @Component({
   selector: 'app-contact-component',
-  imports: [FormRoot, FormField, NgHcaptchaModule],
+  imports: [FormRoot, FormField, NgHcaptchaModule, ContactError, ContactSuccess],
   templateUrl: './contact-component.html',
   styleUrl: './contact-component.css',
   standalone: true,
@@ -49,7 +51,7 @@ export class ContactComponent {
             await firstValueFrom(this.web3FormService.send(f().value(), this.captchaToken()));
             this.status.set('success');
             this.errorMessage.set('');
-            this.resetModel();
+            // this.resetModel();
           } catch (err) {
             this.status.set('error');
             this.errorMessage.set('Failed to send message');
@@ -83,5 +85,8 @@ export class ContactComponent {
       subject: '',
       message: '',
     });
+  }
+  onSendAnother() {
+    this.status.set('idle');
   }
 }
