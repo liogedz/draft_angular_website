@@ -8,13 +8,13 @@ import { ContactError } from '@components/contact-error/contact-error';
 import { ContactSuccess } from '@components/contact-success/contact-success';
 
 @Component({
-  selector: 'app-contact-component',
+  selector: 'app-contact',
   imports: [FormRoot, FormField, NgHcaptchaModule, ContactError, ContactSuccess],
-  templateUrl: './contact-component.html',
-  styleUrl: './contact-component.css',
+  templateUrl: './contact.html',
+  styleUrl: './contact.css',
   standalone: true,
 })
-export class ContactComponent {
+export class Contact {
   readonly status = signal<'idle' | 'success' | 'sending' | 'error'>('idle');
   readonly errorMessage = signal('');
   captchaToken = signal('');

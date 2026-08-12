@@ -1,22 +1,23 @@
 import {
   AfterViewInit,
   Component,
-  computed, DestroyRef,
+  computed,
+  DestroyRef,
   ElementRef,
   input,
   QueryList,
   signal,
-  ViewChildren
+  ViewChildren,
 } from '@angular/core';
 
 @Component({
-  selector: 'app-carousel-component',
+  selector: 'app-carousel',
   imports: [],
-  templateUrl: './carousel-component.html',
-  styleUrl: './carousel-component.css',
-  standalone: true
+  templateUrl: './carousel.html',
+  styleUrl: './carousel.css',
+  standalone: true,
 })
-export class CarouselComponent implements AfterViewInit {
+export class Carousel implements AfterViewInit {
   @ViewChildren('slide') slides!: QueryList<ElementRef>;
 
   items = input<string[]>([]);
@@ -31,8 +32,7 @@ export class CarouselComponent implements AfterViewInit {
     return -this.currentIndex() * this.slideWidth() + this.dragOffset();
   });
 
-  constructor(private destroyRef: DestroyRef) {
-  }
+  constructor(private destroyRef: DestroyRef) {}
 
   ngAfterViewInit(): void {
     this.updateSlideWidth();
@@ -43,13 +43,13 @@ export class CarouselComponent implements AfterViewInit {
 
   next() {
     if (this.currentIndex() < this.items().length - 1) {
-      this.currentIndex.update(i => i + 1);
+      this.currentIndex.update((i) => i + 1);
     }
   }
 
   prev() {
     if (this.currentIndex() > 0) {
-      this.currentIndex.update(i => i - 1);
+      this.currentIndex.update((i) => i - 1);
     }
   }
 
@@ -82,7 +82,7 @@ export class CarouselComponent implements AfterViewInit {
   getX(event: MouseEvent | TouchEvent): number {
     return event instanceof MouseEvent
       ? event.clientX
-      : event.touches[0]?.clientX ?? event.changedTouches[0].clientX;
+      : (event.touches[0]?.clientX ?? event.changedTouches[0].clientX);
   }
 
   updateSlideWidth() {

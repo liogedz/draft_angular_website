@@ -23,15 +23,15 @@
         her lower arm towards the viewer. Gregor then turned to look out the window at the dull weather. Drops</p>
 
       <button (click)="openCards1()"
+              [ngClass]="showCards1() ? 'bg-red-500 hover:bg-red-700':'bg-indigo-600 hover:bg-indigo-700'"
               class="
         cursor-pointer group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md
-        text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-              [ngClass]="showCards1() ? 'bg-red-500 hover:bg-red-700':'bg-indigo-600 hover:bg-indigo-700'">
+        text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
         {{ showCards1() ? 'Close' : 'Show ' }}
 
       </button>
       @if (showCards1()) {
-        <app-carousel-component [items]="firstCarousel"></app-carousel-component>
+        <app-carousel [items]="firstCarousel"></app-carousel>
       }
 
       <p class="text-gray-700">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia,
@@ -47,15 +47,15 @@
         Pitiful a rhetoric question ran over her cheek, then</p>
 
       <button (click)="openCards2()"
+              [ngClass]="showCards2() ? 'bg-red-500 hover:bg-red-700':'bg-indigo-600 hover:bg-indigo-700'"
               class="
         cursor-pointer group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md
-        text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-              [ngClass]="showCards2() ? 'bg-red-500 hover:bg-red-700':'bg-indigo-600 hover:bg-indigo-700'">
+        text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
         {{ showCards2() ? 'Close' : 'Show' }}
 
       </button>
       @if (showCards2()) {
-        <app-carousel-component [items]="secondCarousel"></app-carousel-component>
+        <app-carousel [items]="secondCarousel"></app-carousel>
       }
     </div>
   </div>
