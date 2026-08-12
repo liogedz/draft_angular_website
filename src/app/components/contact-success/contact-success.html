@@ -10,15 +10,17 @@
     shadow-lg border border-white/50
     space-y-2 sm:space-y-4 lg:space-y-6
       "><p>Thank you for reaching us, your message was sent! We'll come back to you soon!</p>
-      <button (click)="onSendAnother()"
-              class="py-3 px-5 text-sm font-medium text-center text-white rounded-lg bg-primary-700 sm:w-fit hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300">
-        Send another message
-      </button>
+      <div class="mt-6 grid grid-cols-2 gap-3">
+        <button (click)="onSendAnother()"
+                class="py-3 px-5 text-sm font-medium text-center text-white rounded-lg bg-primary-700 sm:w-fit hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300">
+          Send another message
+        </button>
 
-      <button [routerLink]="['/home']"
-              class="py-3 px-5 text-sm font-medium text-center text-white rounded-lg bg-primary-700 sm:w-fit hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300">
-        To starting page
-      </button>
+        <button [routerLink]="['/home']"
+                class="py-3 px-5 text-sm font-medium text-center text-white rounded-lg bg-primary-700 sm:w-fit hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300">
+          To starting page
+        </button>
+      </div>
     </div>
   </div>
 </div>

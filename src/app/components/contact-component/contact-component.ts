@@ -18,23 +18,11 @@ export class ContactComponent {
   readonly status = signal<'idle' | 'success' | 'sending' | 'error'>('idle');
   readonly errorMessage = signal('');
   captchaToken = signal('');
-  onVerify(token: string) {
-    this.captchaToken.set(token);
-  }
-  onExpired() {
-    this.captchaToken.set('');
-  }
-  onError() {
-    this.captchaToken.set('');
-  }
-
-  constructor(private web3FormService: Web3FormsService) {}
   contactModel = signal<ContactData>({
     email: '',
     subject: '',
     message: '',
   });
-
   contactForm = form(
     this.contactModel,
     (fieldPath) => {
@@ -51,7 +39,6 @@ export class ContactComponent {
             await firstValueFrom(this.web3FormService.send(f().value(), this.captchaToken()));
             this.status.set('success');
             this.errorMessage.set('');
-            // this.resetModel();
           } catch (err) {
             this.status.set('error');
             this.errorMessage.set('Failed to send message');
@@ -60,33 +47,41 @@ export class ContactComponent {
       },
     },
   );
-
   hasFormErrors = computed(
     () =>
       this.contactForm.email().invalid() ||
       this.contactForm.subject().invalid() ||
       this.contactForm.message().invalid(),
   );
-
   formTouched = computed(
     () =>
       this.contactForm.email().touched() ||
       this.contactForm.subject().touched() ||
       this.contactForm.message().touched(),
   );
-
   isCaptchaMissing = computed(() => !this.captchaToken());
-
   isFormDisabled = computed(() => this.hasFormErrors() || this.isCaptchaMissing());
 
-  resetModel() {
-    this.contactModel.set({
-      email: '',
-      subject: '',
-      message: '',
-    });
+  constructor(private web3FormService: Web3FormsService) {}
+
+  onVerify(token: string) {
+    this.captchaToken.set(token);
   }
+
+  onExpired() {
+    this.captchaToken.set('');
+  }
+
+  onError() {
+    this.captchaToken.set('');
+  }
+
   onSendAnother() {
     this.status.set('idle');
+    this.contactModel.update((value) => ({
+      ...value,
+      subject: '',
+      message: '',
+    }));
   }
 }

@@ -10,14 +10,16 @@
     shadow-lg border border-white/50
     space-y-2 sm:space-y-4 lg:space-y-6
       "><p>Something went wrong, please give it another try or contact us via e-mail provided!</p>
-      <button (click)="onAnotherTry()"
-              class="py-3 px-5 text-sm font-medium text-center text-white rounded-lg bg-primary-700 sm:w-fit hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300">
-        Another try
-      </button>
-      <button [routerLink]="['/home']"
-              class="py-3 px-5 text-sm font-medium text-center text-white rounded-lg bg-primary-700 sm:w-fit hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300">
-        To starting page
-      </button>
+      <div class="mt-6 grid grid-cols-2 gap-3">
+        <button (click)="onAnotherTry()"
+                class="py-3 px-5 text-sm font-medium text-center text-white rounded-lg bg-primary-700 sm:w-fit hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300">
+          Try again
+        </button>
+        <button [routerLink]="['/home']"
+                class="py-3 px-5 text-sm font-medium text-center text-white rounded-lg bg-primary-700 sm:w-fit hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300">
+          To starting page
+        </button>
+      </div>
     </div>
   </div>
 </div>
