@@ -2,17 +2,16 @@
   <div class="container mx-auto flex items-center justify-between px-4">
     <!-- Logo -->
     <a [routerLink]="['/home']" class="flex items-center gap-2 text-primary hover:text-secondary cursor-pointer">
-      <!--    <a class="flex items-center gap-2 text-primary hover:text-secondary cursor-pointer">-->
-      <img class="h-7 w-7" src="/butterfly.svg" alt="Butterfly">
+      <img alt="Butterfly" class="h-7 w-7" src="/butterfly.svg">
       <span class="text-2xl font-bold">Whazaaap</span>
     </a>
     <!-- Mobile Menu Button -->
     <button
-      class="menu-button md:hidden text-gray-800 hover:text-primary focus:outline-none transition-colors duration-300"
-      (click)="navbar.toggleMobileMenu(); $event.stopPropagation()">
-      <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-              d="M4 6h16M4 12h16m-7 6h7" />
+      (click)="navbar.toggleMobileMenu(); $event.stopPropagation()"
+      class="menu-button md:hidden text-gray-800 hover:text-primary focus:outline-none transition-colors duration-300">
+      <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path d="M4 6h16M4 12h16m-7 6h7" stroke-linecap="round" stroke-linejoin="round"
+              stroke-width="2" />
       </svg>
     </button>
     <!-- Desktop Navigation -->
@@ -24,18 +23,23 @@
           </a>
         </li>
         <li>
-          <a [routerLink]="['/calculator']" class="hover:text-primary transition cursor-pointer">
-            Calculator
-          </a>
-        </li>
-        <li>
           <a [routerLink]="['/about']" class="hover:text-primary transition cursor-pointer">
             About
           </a>
         </li>
+        <li>
+          <a [routerLink]="['/gallery']" class="hover:text-primary transition cursor-pointer">
+            Gallery
+          </a>
+        </li>
+        <li>
+          <a [routerLink]="['/calculator']" class="hover:text-primary transition cursor-pointer">
+            Calculator
+          </a>
+        </li>
         <!-- Services Dropdown (CLICK) -->
-        <li class="relative services-menu"
-            (clickOutside)="navbar.isServicesOpen.set(false)"
+        <li (clickOutside)="navbar.isServicesOpen.set(false)"
+            class="relative services-menu"
         >
           <span
             (click)="navbar.toggleServices(); $event.stopPropagation()"
@@ -51,8 +55,8 @@
             <ul class="absolute left-0 top-full bg-white shadow-md py-2 rounded-md w-48 z-50">
               <li>
                 <a
-                  [routerLink]="['/services']"
                   (click)="navbar.closeAll()"
+                  [routerLink]="['/services']"
                   class="block px-4 py-2 hover:bg-gray-100">
                   Service 1
                 </a>
@@ -85,34 +89,34 @@
   </div>
   <!-- Mobile Navigation -->
   @if (navbar.isMobileMenuOpen()) {
-    <nav class="mobile-menu md:hidden bg-gray-50 border-t border-gray-200"
-         (clickOutside)="navbar.isMobileMenuOpen.set(false)"
+    <nav (clickOutside)="navbar.isMobileMenuOpen.set(false)"
+         class="mobile-menu md:hidden bg-gray-50 border-t border-gray-200"
     >
       <ul class="px-4 py-4 space-y-2">
         <li>
-          <a [routerLink]="['/home']" (click)="navbar.closeAll()" class="block py-2 hover:text-primary">
+          <a (click)="navbar.closeAll()" [routerLink]="['/home']" class="block py-2 hover:text-primary">
             Home
           </a>
         </li>
         <li>
-          <a [routerLink]="['/calculator']" (click)="navbar.closeAll()" class="block py-2 hover:text-primary">
+          <a (click)="navbar.closeAll()" [routerLink]="['/calculator']" class="block py-2 hover:text-primary">
             Calculator
           </a>
         </li>
         <li>
-          <a [routerLink]="['/about']" (click)="navbar.closeAll()" class="block py-2 hover:text-primary">
+          <a (click)="navbar.closeAll()" [routerLink]="['/about']" class="block py-2 hover:text-primary">
             About
           </a>
         </li>
         <li class="services-menu">
           <span
-            class="block py-2 hover:text-primary cursor-pointer"
-            (click)="navbar.toggleServices(); $event.stopPropagation()">
+            (click)="navbar.toggleServices(); $event.stopPropagation()"
+            class="block py-2 hover:text-primary cursor-pointer">
             Services
           </span>
           @if (navbar.isServicesOpen()) {
             <ul class="pl-4 space-y-1">
-              <li><a [routerLink]="['/services']" (click)="navbar.closeAll()" class="block py-2 hover:text-primary">Service
+              <li><a (click)="navbar.closeAll()" [routerLink]="['/services']" class="block py-2 hover:text-primary">Service
                 1</a></li>
               <li><a (click)="navbar.closeAll()" class="block py-2 hover:text-primary">Service 2</a></li>
               <li><a (click)="navbar.closeAll()" class="block py-2 hover:text-primary">Service 3</a></li>
@@ -120,7 +124,7 @@
           }
         </li>
         <li>
-          <a [routerLink]="['/contact']" (click)="navbar.closeAll()" class="block py-2 hover:text-primary">
+          <a (click)="navbar.closeAll()" [routerLink]="['/contact']" class="block py-2 hover:text-primary">
             Contact
           </a>
         </li>

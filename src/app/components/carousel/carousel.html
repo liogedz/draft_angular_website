@@ -1,52 +1,41 @@
 <div class="relative w-full h-full">
   <div
-    class="overflow-hidden"
     (mousedown)="startDrag($event)"
+    (mouseleave)="endDrag()"
     (mousemove)="onDrag($event)"
     (mouseup)="endDrag()"
-    (mouseleave)="endDrag()"
-    (touchstart)="startDrag($event)"
-    (touchmove)="onDrag($event)"
     (touchend)="endDrag()"
+    (touchmove)="onDrag($event)"
+    (touchstart)="startDrag($event)"
+    class="overflow-hidden"
   >
     <div
-      class="flex"
       [class.transition-transform]="!isDragging()"
       [style.transform]="'translateX(' + translateX() + 'px)'"
+      class="flex"
     >
-      @for (item of items(); track $index) {
-        <div
-          class="min-w-full p-4"
-          #slide
-        >
-          <div class="bg-white rounded-2xl shadow-md p-6 text-center">
-            {{ item }}
-          </div>
-        </div>
-      }
+      <ng-content />
     </div>
   </div>
   <button
-    class="absolute left-2 top-1/2 -translate-y-1/2 bg-black/60 text-white px-3 py-2 rounded-full opacity-20"
     (click)="prev()"
+    class="absolute left-2 top-1/2 -translate-y-1/2 bg-black/60 text-white px-3 py-2 rounded-full opacity-20"
   >
     ‹
   </button>
-
   <button
-    class="absolute right-2 top-1/2 -translate-y-1/2 bg-black/60 text-white px-3 py-2 rounded-full opacity-20"
     (click)="next()"
+    class="absolute right-2 top-1/2 -translate-y-1/2 bg-black/60 text-white px-3 py-2 rounded-full opacity-20"
   >
     ›
   </button>
-
   <div class="flex justify-center mt-4 gap-2">
-    @for (_ of items(); track $index) {
+    @for (index of slideIndexes(); track index) {
       <div
-        class="h-2 w-2 rounded-full cursor-pointer transition-all"
+        (click)="goTo($index)"
         [class.bg-blue-500]="$index === currentIndex()"
         [class.bg-gray-300]="$index !== currentIndex()"
-        (click)="goTo($index)"
+        class="h-2 w-2 rounded-full cursor-pointer transition-all"
       ></div>
     }
   </div>

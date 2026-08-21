@@ -1,7 +1,6 @@
 <body>
 <div class="relative min-h-screen bg-linear-to-br from-purple-100 to-blue-200">
 
-  <!-- Centered blurred card -->
   <div class="absolute inset-0 flex items-center justify-center">
     <div class="
         w-full sm:w-1/3
@@ -31,7 +30,15 @@
 
       </button>
       @if (showCards1()) {
-        <app-carousel [items]="firstCarousel"></app-carousel>
+        <app-carousel>
+          @for (item of firstCarousel; track $index) {
+            <div #slide class="min-w-full p-4">
+              <div class="bg-white rounded-2xl shadow-md p-6 text-center">
+                {{ item }}
+              </div>
+            </div>
+          }
+        </app-carousel>
       }
 
       <p class="text-gray-700">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia,
@@ -55,7 +62,15 @@
 
       </button>
       @if (showCards2()) {
-        <app-carousel [items]="secondCarousel"></app-carousel>
+        <app-carousel>
+          @for (item of secondCarousel; track $index) {
+            <div #slide class="min-w-full p-4">
+              <div class="bg-white rounded-2xl shadow-md p-6 text-center">
+                {{ item }}
+              </div>
+            </div>
+          }
+        </app-carousel>
       }
     </div>
   </div>

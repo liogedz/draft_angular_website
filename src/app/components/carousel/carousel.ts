@@ -2,12 +2,11 @@ import {
   AfterViewInit,
   Component,
   computed,
+  ContentChildren,
   DestroyRef,
   ElementRef,
-  input,
   QueryList,
   signal,
-  ViewChildren,
 } from '@angular/core';
 
 @Component({
@@ -18,10 +17,10 @@ import {
   standalone: true,
 })
 export class Carousel implements AfterViewInit {
-  @ViewChildren('slide') slides!: QueryList<ElementRef>;
+  @ContentChildren('slide', { read: ElementRef })
+  slides!: QueryList<ElementRef>;
 
-  items = input<string[]>([]);
-
+  slideCount = signal(0);
   currentIndex = signal(0);
   isDragging = signal(false);
   dragStartX = signal(0);
@@ -32,17 +31,20 @@ export class Carousel implements AfterViewInit {
     return -this.currentIndex() * this.slideWidth() + this.dragOffset();
   });
 
+  slideIndexes = computed(() => Array.from({ length: this.slideCount() }, (_, i) => i));
+
   constructor(private destroyRef: DestroyRef) {}
 
   ngAfterViewInit(): void {
     this.updateSlideWidth();
+    this.slideCount.set(this.slides.length);
     const handler = () => this.updateSlideWidth();
     window.addEventListener('resize', handler);
     this.destroyRef.onDestroy(() => window.removeEventListener('resize', handler));
   }
 
   next() {
-    if (this.currentIndex() < this.items().length - 1) {
+    if (this.currentIndex() < this.slides.length - 1) {
       this.currentIndex.update((i) => i + 1);
     }
   }

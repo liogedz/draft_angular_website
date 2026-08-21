@@ -10,7 +10,17 @@
     shadow-lg border border-white/50
     space-y-2 sm:space-y-4 lg:space-y-6
       ">
-      <p>services-component works!</p>
+      <p class="text-gray-700">We sit together Mountain and I until the only Mountain remains</p>
+      <app-carousel>
+        @for (image of galleryImages; track image) {
+          <div #slide class="min-w-full p-4">
+            <img
+              [src]="image.src"
+              class="w-full rounded-2xl"
+            />
+          </div>
+        }
+      </app-carousel>
     </div>
   </div>
 </div>
