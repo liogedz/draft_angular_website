@@ -74,7 +74,7 @@ export class Carousel implements AfterViewInit {
 
   endDrag() {
     if (!this.isDragging()) return;
-    const threshold = this.slideWidth() / 4;
+    const threshold = this.slideWidth() / 6;
     if (this.dragOffset() < -threshold) this.next();
     else if (this.dragOffset() > threshold) this.prev();
     this.dragOffset.set(0);
