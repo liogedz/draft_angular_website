@@ -16,8 +16,9 @@
           <div #slide class="min-w-full p-4">
             <img
               [src]="image.src"
-              class="w-full rounded-2xl"
-            />
+              alt="image"
+              class="w-full rounded-2xl pointer-events-none select-none"
+              draggable="false" />
           </div>
         }
       </app-carousel>
