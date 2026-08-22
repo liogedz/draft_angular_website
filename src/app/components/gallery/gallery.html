@@ -23,11 +23,25 @@
         <app-carousel>
           @for (image of skyGalleryImages; track image) {
             <div #slide class="min-w-full p-4">
-              <img
-                [src]="image.src"
-                alt="image"
-                class="w-full rounded-2xl pointer-events-none"
-              />
+              <div class="relative overflow-hidden rounded-2xl shadow-lg">
+                <img
+                  [alt]="image.title"
+                  [src]="image.src"
+                  class="w-full pointer-events-none"
+                />
+                <div
+                  class="absolute inset-x-0 bottom-0
+                 bg-black/45 backdrop-blur-sm
+                 px-5 py-4 text-white"
+                >
+                  <h3 class="text-lg font-semibold">
+                    {{ image.title }}
+                  </h3>
+                  <p class="mt-1 text-sm text-white/80">
+                    {{ image.description }}
+                  </p>
+                </div>
+              </div>
             </div>
           }
         </app-carousel>
@@ -46,11 +60,25 @@
         <app-carousel>
           @for (image of macroGalleryImages; track image) {
             <div #slide class="min-w-full p-4">
-              <img
-                [src]="image.src"
-                alt="image"
-                class="w-full rounded-2xl pointer-events-none"
-              />
+              <div class="relative overflow-hidden rounded-2xl shadow-lg">
+                <img
+                  [alt]="image.title"
+                  [src]="image.src"
+                  class="w-full pointer-events-none"
+                />
+                <div
+                  class="absolute inset-x-0 bottom-0
+                 bg-black/45 backdrop-blur-sm
+                 px-5 py-4 text-white"
+                >
+                  <h3 class="text-lg font-semibold">
+                    {{ image.title }}
+                  </h3>
+                  <p class="mt-1 text-sm text-white/80">
+                    {{ image.description }}
+                  </p>
+                </div>
+              </div>
             </div>
           }
         </app-carousel>
