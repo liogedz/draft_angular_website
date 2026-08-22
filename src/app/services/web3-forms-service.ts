@@ -10,7 +10,7 @@ export class Web3FormsService {
   constructor(private http: HttpClient) {}
 
   send(data: ContactData, captchaToken: string) {
-    console.log(data);
+    // console.log(data);
     return this.http.post(this.url, {
       access_key: this.key,
       ...data,

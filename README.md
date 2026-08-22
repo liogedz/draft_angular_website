@@ -1,15 +1,43 @@
-# My website
+# My Website
 
-Developing my draft website frontend only
+A frontend-only draft website built with Angular, focused on responsive design, reusable components, and modern Angular features.
+
+## Features
+
+* Angular components built with **Signals**
+* Fully **responsive design**
+* Contact form using **Angular Signal Forms** and [`web3forms`](https://web3forms.com/)
+* **hCaptcha** integration to help prevent automated/bot form submissions
+* Pages:
+
+  * `Home`
+  * `About`
+  * `Gallery`
+  * `Calculator`
+  * `Contact`
+  * Three expandable `Services` sections
+* Reusable **carousel component** shared by:
+
+  * `Home` for text content
+  * `Gallery` for images
+* Designed with **reusability and universal usage** in mind
+* Continuously enhanced as new features and improvements are added
 
 ## Environment
 
-Set your `web3FormKey` in [environment](./src/app/common/environment.ts)
-it is safe to be public
+The contact form requires a Web3Forms access key.
+
+Set your `web3FormKey` in:
+
+```text
+src/app/common/environment.ts
+```
+
+The Web3Forms access key is intended to be used on the frontend and can therefore be publicly exposed.
 
 ## Angular
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.0.6.
+This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version **22.0.6**.
 
 ## Development server
 
@@ -19,50 +47,22 @@ To start a local development server, run:
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Then open `http://localhost:4200/` in your browser.
 
-## Code scaffolding
+The application automatically reloads whenever source files are modified.
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## Build
 
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
+To build the project for production:
 
 ```bash
 ng build
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+The compiled application will be placed in the `dist/` directory.
 
-## Running unit tests
+## Project Status
 
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+This is a **frontend-only draft project** and is continuously evolving.
 
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+The main goal is to experiment with Angular features, reusable components, responsive UI, and frontend-only solutions while keeping the application suitable for further extension.
